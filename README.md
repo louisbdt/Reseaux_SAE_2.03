@@ -1,11 +1,5 @@
-<style>
-.titre {font-size: 38px; text-align: center;} 
-.sous-titre {font-size: 32px; text-align: center;}
-.image {padding: 15px; border-left: solid lightgrey 4px; margin: 10px 10px 10px 0px; background-color: #f0f0f0}
-</style>
-<strong><div class="titre">SAE 2.03</div></strong>
-<div class="sous-titre">Module Réseau</div>
-<hr>
+<center><strong><h1><div class="titre">SAE 2.03</div></strong>
+<div class="sous-titre">Module Réseau</div></center>
 <br>
 
 <u>Objectifs :</u>
