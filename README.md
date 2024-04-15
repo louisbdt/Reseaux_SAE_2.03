@@ -12,10 +12,11 @@
 
 
 <u>Sommaire :</u>
-- 1. [Gestion des services : <code>systemd</code>](#1)
-- 2. [Serveur Web Apache](#2) 
-   - 2.1. [Configuration de base](#21)
-   - 2.2. [Les serveurs virtuels](#22)
+- [1. Gestion des services : systemd](#1-gestion-des-services--systemd)
+- [2. Serveur Web Apache](#2-serveur-web-apache)
+  - [2.1. Configuration de base](#21-configuration-de-base)
+  - [2.2. Les serveurs virtuels](#22-les-serveurs-virtuels)
+- [3. Serveur Web sécurisé https](#3-serveur-web-sécurisé-https)
 
 
 
@@ -146,3 +147,35 @@
 - Activez votre site avec la commande : <code>a2ensite 2A4V3-31UVM0420</code>
    <code>sudo a2ensite 2A4V3-31UVM0420</code>
    <code>sudo systemctl reload apache2</code>
+
+- Vérifiez l'accès à votre serveur en accédant à l'URL : <code>http://nom_DNS_de_votre_VM.ad-urca.univ-reims.fr</code>
+  <div><img src="Screenshots\P1Question2-6.png"></div>
+
+# 3. Serveur Web sécurisé https<a name="3"></a>
+
+- Vérifiez la présence des paquets nécessaires : <code>libssl</code>, <code>openssl</code> et <code>ssl-cert</code>
+   <code>dpkg -l | grep ssl</code>
+   <div><img src="Screenshots\P1Question3-1.png"></div>
+
+- Créez le certificat correspondant à votre site et stockez-le dans le répertoire <code>/etc/apache2/ssl</code>
+
+   <code>mkdir /etc/apache2/ssl</code> 
+   <code>/usr/sbin/make-ssl-cert /usr/share/ssl-cert/ssleay.cnf /etc/apache2/ssl/apache.pem</code>
+   <div><img src="Screenshots\P1Question3-2.png"></div>
+   <div><img src="Screenshots\P1Question3-3.png"></div>
+
+- Créez le fichier de configuration du VirtualHost de votre serveur <code>ssl</code> en faisant une copie du fichier <code>default-ssl.conf</code> (du répertoire <code>/etc/apache2/sites-available</code>)
+
+   <code>sudo cp /etc/apache2/sites-available/default-ssl.conf /etc/apache2/sites-available/mon-serveur-ssl.conf</code>
+
+- Activez le module ssl d'apache :
+   <code>sudo a2enmod ssl</code>
+
+- Activez votre site
+   <code>sudo a2ensite mon-serveur-ssl.conf</code>
+
+- Redémarrez le service apache
+   <code>sudo systemctl restart apache2</code>
+
+- Testez l'accès aux pages avec l'URL : <code>https://nom_DNS_de_votre_VM.ad-urca.univ-reims.fr</code>
+  <div><img src="Screenshots\P1Question3-4.png"></div>
