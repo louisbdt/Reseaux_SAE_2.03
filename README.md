@@ -17,6 +17,7 @@
   - [2.1. Configuration de base](#21-configuration-de-base)
   - [2.2. Les serveurs virtuels](#22-les-serveurs-virtuels)
 - [3. Serveur Web sécurisé https](#3-serveur-web-sécurisé-https)
+- [4. Langage de programmation PHP](#4-langage-de-programmation-php)
 
 
 
@@ -179,3 +180,25 @@
 
 - Testez l'accès aux pages avec l'URL : <code>https://nom_DNS_de_votre_VM.ad-urca.univ-reims.fr</code>
   <div><img src="Screenshots\P1Question3-4.png"></div>
+
+# 4. Langage de programmation PHP<a name="4"></a>
+
+- Installez les paquets <code>php</code> et <code>libapache2-mod-php</code>
+   <code>sudo apt-get install php</code>
+   <code>sudo apt-get install libapache2-mod-php</code>
+
+- Éditez le fichier <code>/etc/apache2/mods-enabled/php<n°_de_version>.conf</code> (le nom exact dépendant de la version installée) et commenter les 5 dernières lignes (ces lignes interdisent l’exécution de php pour les pages Web des utilisateurs)
+  
+  <code>sudo nano /etc/apache2/mods-enabled/php8.1.conf</code>
+  <div><img src="Screenshots\P1Question4-1.png"></div>
+
+- Redémarrez le service apache2
+   <code>sudo systemctl restart apache2</code>
+
+- Créez un fichier <code>index.php</code> dans votre répertoire <code>public_html</code> contenant la ligne suivante : <code><?php phpinfo();</code>
+  <code>touch index.php</code>
+  <code>nano index.php</code>
+  <div><img src="Screenshots\P1Question4-2.png"></div>
+
+- Vérifiez le résultat en affichant la page correspondante dans votre navigateur.
+   <div><img src="Screenshots\P1Question4-3.png"></div>
