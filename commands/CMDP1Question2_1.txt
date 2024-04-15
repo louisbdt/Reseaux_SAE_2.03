@@ -1,0 +1,16 @@
+Reading package lists...
+Building dependency tree...
+Reading state information...
+Les paquets supplémentaires suivants seront installés : 
+  apache2-bin apache2-data apache2-utils bzip2 libapr1 libaprutil1
+  libaprutil1-dbd-sqlite3 libaprutil1-ldap liblua5.3-0 mailcap mime-support
+Paquets suggérés :
+  apache2-doc apache2-suexec-pristine | apache2-suexec-custom www-browser
+  bzip2-doc
+Les NOUVEAUX paquets suivants seront installés :
+  apache2 apache2-bin apache2-data apache2-utils bzip2 libapr1 libaprutil1
+  libaprutil1-dbd-sqlite3 libaprutil1-ldap liblua5.3-0 mailcap mime-support
+0 mis à jour, 12 nouvellement installés, 0 à enlever et 90 non mis à jour.
+Il est nécessaire de prendre 2 121 ko dans les archives.
+Après cette opération, 8 455 ko d'espace disque supplémentaires seront utilisés.
+Souhaitez-vous continuer ? [O/n] 

@@ -108,3 +108,41 @@
    <div><img src="Screenshots/P1Question2_1-13.png"></div>
 
 ## 2.2. Les serveurs virtuels<a name="22"></a>
+- Configuration d'un serveur Web virtuel
+   <code>nslookup 10.31.33.164</code>
+   <div><img src="Screenshots/P1Question2_2-11.png"></div>
+
+- Créez un répertoire de travail <code>mon_serveur</code> dans le répertoire d'accueil (<code>$HOME</code>) de l'utilisateur **iut** de votre machine virtuelle.
+   <code>mkdir mon_serveur</code>
+
+- Donnez les droits d'accès à ce répertoire pour l'utilisateur <code>www-data</code>
+  
+   <code>sudo chown iut:www-data mon_serveur/</code>
+   <code>sudo chmod 755 mon_serveur/</code>
+   <code>sudo apt-get install acl</code>
+   <div><img src="Screenshots/P1Question2_2-2.png"></div>
+   <code>getfacl mon_serveur/</code>
+   <div><img src="Screenshots/P1Question2_2-3.png"></div>
+   Droit execution et de lecture pour <code>www-data</code>
+
+- Créez un lien symbolique de votre répertoire vers l'arborescence /var/www avec la commande suivante :
+  
+   <code>sudo ln -s /home/iut/mon_serveur /var/www</code>
+
+- Créez un fichier <code>index.html</code> contenant une phrase simple, dans le répertoire <code>mon_serveur</code>
+  
+  <div><img src="Screenshots/P1Question2_2-4.png"></div>
+
+- Déplacez vous dans le répertoire <code>/etc/apache2/sites-available</code>
+   <code>cd /etc/apache2/sites-available</code>
+
+- Copiez le fichier <code>000-default.conf</code> en <code>nom_DNS_de_votre_VM.conf</code>
+  <code>sudo cp 000-default.conf 2A4V3-31UVM0420.conf</code>
+
+- Éditez ce fichier et modifiez les lignes suivantes pour configurer votre serveur :
+  <code>sudo nano 2A4V3-31UVM0420.conf</code>
+  <div><img src="Screenshots\P1Question2_2-53.png"></div>
+
+- Activez votre site avec la commande : <code>a2ensite 2A4V3-31UVM0420</code>
+   <code>sudo a2ensite 2A4V3-31UVM0420</code>
+   <code>sudo systemctl reload apache2</code>
