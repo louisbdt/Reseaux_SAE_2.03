@@ -18,6 +18,8 @@
   - [2.2. Les serveurs virtuels](#22-les-serveurs-virtuels)
 - [3. Serveur Web sécurisé https](#3-serveur-web-sécurisé-https)
 - [4. Langage de programmation PHP](#4-langage-de-programmation-php)
+- [5. Serveur de base de données MySQL](#5-serveur-de-base-de-données-mysql)
+- [6. Outil d'administration de bases de données phpMyAdmin](#6-outil-dadministration-de-bases-de-données-phpmyadmin)
 
 
 
@@ -200,3 +202,57 @@
   <code>nano index.php</code>
 
 - Vérifiez le résultat en affichant la page correspondante dans votre navigateur.
+
+# 5. Serveur de base de données MySQL<a name="5"></a>
+
+- Installez le paquet <code>mysql-server</code>
+  <code>sudo apt-get install mysql-server</code>
+
+- Configurez la sécurité avec la commande suivante : <code>sudo mysql_secure_installation</code>
+  
+- Vous allez maintenant créer un utilisateur qui aura les privilèges nécessaires à la gestion 
+  des bases de données en suivant les étapes suivantes :
+  
+  - Se connectez en tant que <code>root</code>
+   <code>sudo mysql</code>
+
+  - Créez un utilisateur en mettant un mot de passe (simple pour l'exercice mais compliqué dans la réalité)
+   <code>CREATE USER 'admin'@'localhost' IDENTIFIED BY 'simple_mot_de_passe';</code>
+
+  - Donnez tous les privilèges à cet utilisateur
+   <code>GRANT ALL PRIVILEGES ON *.* TO 'admin'@'localhost' WITH GRANT OPTION;</code>
+
+- Quittez mysql avec la commande
+   <code>exit</code>
+
+- Redémarrez le service <code>mysql</code>
+   <code>systemctl restart mysql</code>
+
+- Testez le serveur avec la commande suivante :
+   <code>mysqlshow -u admin -p</code>
+
+# 6. Outil d'administration de bases de données phpMyAdmin
+
+- Installez le paquet <code>phpmyadmin</code> et répondez attentivement aux différentes questions
+   <code>sudo apt-get install phpmyadmin</code>
+
+- Sélectionnez <code>apache2</code>
+
+- Sélectionnez "oui" pour l'utilisation de <code>dbconfig-common</code>
+
+- Sélectionnez un mot de passe simple dont vous vous souviendrez. Ce mot de passe concerne l'utilisateur <code>phpmyadmin</code> qui se connectera à votre base de données.
+
+- Un fichier de configuration pour apache a été ajouté dans le répertoire <code>/etc/apache2/conf-enabled</code>. Cette configuration sera donc automatiquement activée au redémarrage du serveur Web.
+
+- Activez le module de gestion des chaînes de caractères multi-octets de php
+   <code>sudo phpenmod mbstring</code>
+
+- Redémarrez le service <code>apache2</code>
+   <code>sudo systemctl restart apache2</code>
+
+- Testez l'outil en vous connectant à l'adresse <code>http://<adresse_IP_de_votre_VM>/phpmyadmin</code>.
+Utilisez l'utilisateur <code>admin</code> créé à la suite de l'installation de <code>mysql</code> pour vous connecter.
+
+- Créez un utilisateur <code>mysqltest</code> en cochant l'option "Créer une base portant son nom" et donnez à cet utilisateur tous les privilèges sur cette base
+
+- Testez la connexion à <code>phpMyMdmin</code> avec cet utilisateur.
