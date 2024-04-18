@@ -1,4 +1,4 @@
-<strong><h1><div class="titre">SAE 2.03</div></h1></strong>
+<center><strong><h1><div class="titre">SAE 2.03</div></h1></strong></center>
 <h2><div class="sous-titre">Module Réseau</div></h2>
 <br>
 
@@ -20,6 +20,7 @@
 - [4. Langage de programmation PHP](#4-langage-de-programmation-php)
 - [5. Serveur de base de données MySQL](#5-serveur-de-base-de-données-mysql)
 - [6. Outil d'administration de bases de données phpMyAdmin](#6-outil-dadministration-de-bases-de-données-phpmyadmin)
+- [7. Installation de la plateforme collaborative MediaWiki](#7-installation-de-la-plateforme-collaborative-mediawiki)
 
 
 
@@ -234,6 +235,7 @@
 # 6. Outil d'administration de bases de données phpMyAdmin
 
 - Installez le paquet <code>phpmyadmin</code> et répondez attentivement aux différentes questions
+   
    <code>sudo apt-get install phpmyadmin</code>
 
 - Sélectionnez <code>apache2</code>
@@ -256,3 +258,37 @@ Utilisez l'utilisateur <code>admin</code> créé à la suite de l'installation d
 - Créez un utilisateur <code>mysqltest</code> en cochant l'option "Créer une base portant son nom" et donnez à cet utilisateur tous les privilèges sur cette base
 
 - Testez la connexion à <code>phpMyMdmin</code> avec cet utilisateur.
+
+# 7. Installation de la plateforme collaborative MediaWiki
+
+- Utilisez la commande <code>wget</code> pour télécharger l’archive MediaWiki dans le répertoire personnel de l'utilisateur <code>iut</code> :
+  
+   <code>wget https://releases.wikimedia.org/mediawiki/1.41/mediawiki-1.41.1.zip</code>
+
+- Installez le logiciel MediaWiki en extrayant l'archive directement dans le répertoire <code>/home/iut/mon_serveur</code>
+  
+   <code>sudo apt-get install unzip</code>
+
+   <code>unzip mediawiki-1.41.1.zip</code>
+
+   <code> cp -r mediawiki-1.41.1/* .</code>
+
+- Configurer la base de données : choisir MariaDB/MySQL
+  
+   <code>sudo mysql</code>
+
+   <code>CREATE DATABASE my_wiki;</code>
+
+   <code>CREATE USER 'wikiuser'@'localhost' IDENTIFIED BY 'password';</code>
+
+- Exécuter le script d'installation https://www.mediawiki.org/wiki/Special:MyLanguage/Manual:Config_script
+  
+   <code>sudo nano /etc/apache2/sites-available/mon-serveur-ssl.conf</code>
+
+- Terminez l'installation et vérifiez le bon fonctionnement en accédant à l'URL de votre machine virtuelle : <code>https://2a4v3-31uvm0420.ad-urca.univ-reims.fr</code>
+
+- Installation du package <code>intl</code> pour que le wiki fonctionne
+  
+  <code>sudo apt-get install php8.1-intl</code>
+
+  <code>sudo systemctl restart apache2</code>
